@@ -8,20 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var weatherManager = WeatherManager()
     var body: some View {
         ZStack {
             Color("WeatherColor")
                 .ignoresSafeArea()
             VStack {
-                SearchView()
+                SearchView(weatherManager: weatherManager)
                 Spacer()
-                WeatherView()
-                Spacer()
-                HStack {
-                    WeatherViewBottom()
-                    WeatherViewBottom()
-                    WeatherViewBottom()
-                }
+                WeatherView(condition: weatherManager.weatherModel.conditionName, temp: weatherManager.weatherModel.temperatureString, cityName: weatherManager.weatherModel.cityName)
                 Spacer()
             }
         }
@@ -35,6 +30,8 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct SearchView: View {
+    var weatherManager: WeatherManager
+    @State var location: String = ""
     var body: some View {
         HStack {
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
@@ -42,8 +39,11 @@ struct SearchView: View {
                     .foregroundColor(.white)
                     .font(.system(size: 30))
             }
-            TextField("Search", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/).textFieldStyle(.roundedBorder)
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            TextField("Search", text: $location)
+                .textFieldStyle(.roundedBorder)
+            Button(action: {
+                weatherManager.fetchData(with: location)
+            }) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.white)
                     .font(.system(size: 30))
@@ -53,35 +53,21 @@ struct SearchView: View {
 }
 
 struct WeatherView: View {
+    var condition: String
+    var temp: String
+    var cityName: String
     var body: some View {
         VStack() {
-            Image(systemName: "cloud.fill")
+            Image(systemName: condition)
                 .font(.system(size: 120))
                 .foregroundColor(.white)
             VStack {
-                Text("19 C")
-                Text("15.10.2021")
+                Text("\(temp) °C")
             }.font(.system(size: 30)).foregroundColor(.white)
-            Text("Vienna")
+            Text(cityName)
                 .font(.system(size: 35))
                 .foregroundColor(.white)
         }.padding()
     }
 }
 
-struct WeatherViewBottom: View {
-    var body: some View {
-        VStack() {
-            Image(systemName: "cloud.fill")
-                .font(.system(size: 60))
-                .foregroundColor(.white)
-            VStack {
-                Text("19 C")
-                Text("15.10.2021")
-            }.font(.system(size: 15)).foregroundColor(.white)
-            Text("Vienna")
-                .font(.system(size: 20))
-                .foregroundColor(.white)
-        }.padding(.horizontal)
-    }
-}
