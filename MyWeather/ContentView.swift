@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var locationManager = LocationManager()
     @ObservedObject var weatherManager = WeatherManager()
     var body: some View {
         ZStack {
@@ -19,6 +20,11 @@ struct ContentView: View {
                 WeatherView(condition: weatherManager.weatherModel.conditionName, temp: weatherManager.weatherModel.temperatureString, cityName: weatherManager.weatherModel.cityName)
                 Spacer()
             }
+        }.onAppear {
+            locationManager.checkIfLocationServiceIsEnabled()
+            weatherManager.fetchCurrentLocation(latitude: locationManager.latitude, longitude: locationManager.longitude)
+            print(locationManager.latitude)
+            print(locationManager.longitude)
         }
     }
 }
@@ -30,19 +36,26 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct SearchView: View {
+    @ObservedObject var locationManager = LocationManager()
     var weatherManager: WeatherManager
     @State var location: String = ""
     var body: some View {
         HStack {
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            Button(action: {
+                weatherManager.fetchCurrentLocation(latitude: locationManager.latitude, longitude: locationManager.longitude)
+            }) {
                 Image(systemName: "paperplane.circle.fill")
                     .foregroundColor(.white)
                     .font(.system(size: 30))
             }
-            TextField("Search", text: $location)
+            TextField("Search", text: $location, onCommit: {
+                weatherManager.fetchCityName(with: location)
+            })
                 .textFieldStyle(.roundedBorder)
+                .keyboardType(.webSearch)
+                
             Button(action: {
-                weatherManager.fetchData(with: location)
+                weatherManager.fetchCityName(with: location)
             }) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.white)

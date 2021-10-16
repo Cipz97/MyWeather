@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B32306EE271AE870006F2573 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32306ED271AE870006F2573 /* LocationManager.swift */; };
 		B32623632719CD0100CA5974 /* MyWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32623622719CD0100CA5974 /* MyWeatherApp.swift */; };
 		B32623652719CD0100CA5974 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32623642719CD0100CA5974 /* ContentView.swift */; };
 		B32623672719CD0300CA5974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B32623662719CD0300CA5974 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B32306ED271AE870006F2573 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B326235F2719CD0100CA5974 /* MyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32623622719CD0100CA5974 /* MyWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWeatherApp.swift; sourceTree = "<group>"; };
 		B32623642719CD0100CA5974 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				B32623712719DC3500CA5974 /* WeatherManager.swift */,
 				B3262377271A191300CA5974 /* WeatherData.swift */,
 				B3262379271A192300CA5974 /* WeatherModel.swift */,
+				B32306ED271AE870006F2573 /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				B32623762719DD5B00CA5974 /* Constants.swift in Sources */,
 				B3262378271A191300CA5974 /* WeatherData.swift in Sources */,
 				B32623722719DC3500CA5974 /* WeatherManager.swift in Sources */,
+				B32306EE271AE870006F2573 /* LocationManager.swift in Sources */,
 				B32623652719CD0100CA5974 /* ContentView.swift in Sources */,
 				B326237A271A192300CA5974 /* WeatherModel.swift in Sources */,
 				B32623632719CD0100CA5974 /* MyWeatherApp.swift in Sources */,
@@ -296,6 +300,7 @@
 				DEVELOPMENT_TEAM = VMPQ8W88FN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to get your current weather data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -326,6 +331,7 @@
 				DEVELOPMENT_TEAM = VMPQ8W88FN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to get your current weather data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

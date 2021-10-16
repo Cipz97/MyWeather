@@ -7,18 +7,22 @@
 
 import Foundation
 import SwiftUI
-
+import CoreLocation
 
 class WeatherManager: ObservableObject {
     
     @Published var weatherModel = WeatherModel(conditionId: 800, cityName: "Vienna", temperature: 0.0)
     
-    func fetchData(with location: String) {
+    
+    func fetchCityName(with location: String) {
         let url = "https://api.openweathermap.org/data/2.5/weather?q=\(location)&units=metric&appid=\(K.apiKey)"
         performRequest(url)
-        
     }
-    func performRequest(_ url: String) {
+    func fetchCurrentLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&units=metric&appid=\(K.apiKey)"
+        performRequest(url)
+    }
+    private func performRequest(_ url: String) {
         if let safeUrl = URL(string: url) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: safeUrl) { data, response, error in
